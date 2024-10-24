@@ -1,3 +1,5 @@
+// components/todos.tsx
+
 import { createClient } from "@/utils/supabase/server";
 import Todo from "./todo";
 import AddTodo from "./add-todo";
@@ -14,6 +16,7 @@ export default async function Todos() {
   return (
     <div className="flex-1 overflow-auto">
       <div className="flex flex-col">
+        {/* Display incomplete todos */}
         {todos &&
           todos
             .filter((todo) => {
@@ -22,6 +25,8 @@ export default async function Todos() {
             .map((todo) => {
               return <Todo key={todo.id} todo={todo} />;
             })}
+        
+        {/* Display complete todos */}
         {todos &&
           todos
             .filter((todo) => {
@@ -30,6 +35,8 @@ export default async function Todos() {
             .map((todo) => {
               return <Todo key={todo.id} todo={todo} />;
             })}
+
+        {/* Add a new todo */}
         <AddTodo />
       </div>
     </div>

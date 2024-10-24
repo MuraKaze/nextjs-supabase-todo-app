@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
+// Signup user
 export async function signup(formData: FormData) {
   const supabase = createClient();
 
@@ -18,10 +19,12 @@ export async function signup(formData: FormData) {
     throw new Error(error.message);
   }
 
+  // Revalidate the layout asynchronously to refresh the auth status
   revalidatePath("/", "layout");
   redirect("/signin");
 }
 
+// Sign in user
 export async function signin(formData: FormData) {
   const supabase = createClient();
 
@@ -36,10 +39,12 @@ export async function signin(formData: FormData) {
     throw new Error(error.message);
   }
 
+  // Revalidate the layout and async redirect
   revalidatePath("/", "layout");
   redirect("/");
 }
 
+// Sign out user
 export async function signout() {
   const supabase = createClient();
 
